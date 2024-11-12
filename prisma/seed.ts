@@ -11,11 +11,17 @@ async function main() {
         await prisma.product.deleteMany();
         await prisma.category.deleteMany();
 
+        const categoryWhitSlugFormated = categories.map(category => ({
+            ...category,
+            slug: formatText(category.slug)
+        })
+        )
+
         await prisma.category.createMany({
-            data: categories
+            data: categoryWhitSlugFormated
         })
         const categoriesDB = await prisma.category.findMany();
-  
+     
 
         const categoriesMap = categoriesDB.reduce((map, category) => {
             map[category.slug.toLowerCase()] = category.id;
@@ -30,8 +36,8 @@ async function main() {
             await prisma.product.create({
                 data: {
                     ...rest,
-                    slug: formatText(product.name) ,
-                    categoryId: categoriesMap[category]
+                    slug: formatText(product.name),
+                    categoryId: categoriesMap[formatText(category)]
                 }
             })
 
