@@ -4,12 +4,13 @@
 
 import fs from 'fs';
 import path from 'path';
+import { SeedProduct } from '../../../prisma/data/seed-database';
 export const getMcDonaldData = async () => {
 
-    const mcData = await fetch('https://api-mcd-ecommerce-ar.appmcdonalds.com/catalog/menu/lite')
+    const mcData = await fetch('https://api-mcd-ecommerce-ar.appmcdonalds.com/catalog/menu')
     const data = await mcData.json();
-    const categories: any= []
-    const products: any = []
+    const categories: any = []
+    const products: SeedProduct[] = []
 
     data.map((item: any) => {
         categories.push({
@@ -20,6 +21,7 @@ export const getMcDonaldData = async () => {
         })
 
         item.products.map((product: any) => {
+
             products.push({
                 category: item.title.toLowerCase(),
                 name: product.name,
@@ -27,6 +29,7 @@ export const getMcDonaldData = async () => {
                 imageUrl: product.imageUrl,
                 description: product.description,
                 price: product.price.amount,
+                optionsGroups: product.optionsGroups && getOptionsGroup(product.optionsGroups)
             })
         })
 
@@ -42,7 +45,7 @@ export const getMcDonaldData = async () => {
         if (!fs.existsSync(directoryPath)) {
             fs.mkdirSync(directoryPath, { recursive: true });
         }
-        
+
         // Guarda los datos en el archivo data.json
         fs.writeFileSync(filePath, JSON.stringify(dataToSave, null, 2), 'utf8');
         console.log('Data saved to mcData/data/data.json');
@@ -56,5 +59,61 @@ export const getMcDonaldData = async () => {
         categories,
         products
     }
- 
+
+}
+
+
+
+const getOptionsGroup = (optionsGroups: any) => {
+
+    const newOptionsGroups = optionsGroups.map((optionGroup: any) => {
+
+
+        return {
+            name: optionGroup.title,
+            min: optionGroup.min,
+            max: optionGroup.max,
+            options: optionGroup.options && getOptions(optionGroup.options)
+        }
+
+    })
+
+
+    return newOptionsGroups ?? []
+}
+
+
+const getOptions = (options: any) => {
+
+
+    const newOptions = options.map((option: any) => {
+
+        // let newOptionGroups = []
+
+        // if (opt.optionsGroups.length > 1) {
+        //     newOptionGroups = opt.optionsGroups.map((op: any) => {
+        //         return {
+        //             name: op.title,
+        //             min: op.min,
+        //             max: op.max,
+        //             options: op.options
+        //         }
+        //     })
+        // }
+
+
+        return {
+            name: option.name,
+            min: option.min,
+            max: option.max,
+            available: option.available,
+            price: option.price.amount,
+            imageUrl: option.imageUrl,
+            optionsGroups: option.optionsGroups && getOptionsGroup(option.optionsGroups) 
+        }
+
+
+    })
+
+    return newOptions
 }

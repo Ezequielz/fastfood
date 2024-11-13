@@ -1,5 +1,5 @@
-# Quiosco
-__Quiosco, simulacion de pedidos de comida de local de comidas rapidas__
+# Fastfood
+__Fastfood, simulacion de pedidos de comida de local de comidas rapidas__
 
 ## Correr en dev
 
