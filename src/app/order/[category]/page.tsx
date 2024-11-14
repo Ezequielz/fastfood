@@ -1,4 +1,6 @@
-import { getMcDonaldData } from "../../../actions/mc-data/get-mcDonald-data";
+import { getCategorieBySlug } from "@/actions/category/get-category-by-slug";
+import { ProductsByCategoryList } from "../components/products/ProductsByCategoryList";
+import { Suspense } from "react";
 
 
 
@@ -11,13 +13,34 @@ interface Props {
 // }
 
 export default async function OrderCategoryPage({ params }: Props) {
-  const { category } = await params;
-  const { ok } = await getMcDonaldData()
-  console.log(ok)
+  const { category: categorySlug } = await params;
+
+  if (!categorySlug) {
+    return (
+      <div>
+        <span>cargando....</span>
+      </div>
+    )
+  }
+  const { ok, category } = await getCategorieBySlug(categorySlug ?? '')
+
+  if (!ok) {
+    return (
+      <div>
+        <p>No existe esa categoria</p>
+      </div>
+    )
+  }
+
+
   return (
-    <div>
-      <h1>OrderCategoryPage</h1>
-      <p>Category: {category}</p>
+    <div className="p-5">
+
+      <h2 className="my-5 text-2xl font-bold md:text-3xl">{category!.name}</h2>
+      <Suspense fallback={ <div>Cargando...</div> }>
+
+        <ProductsByCategoryList category={category!} />
+      </Suspense>
     </div>
   );
 }

@@ -8,6 +8,10 @@ const nextConfig: NextConfig = {
             protocol: 'https',
             hostname: 'cache-mcd-ecommerce.appmcdonalds.com',
         },
+        {
+            protocol: 'https',
+            hostname: 'd2umxhib5z7frz.cloudfront.net',
+        },
     ],
 },
 };

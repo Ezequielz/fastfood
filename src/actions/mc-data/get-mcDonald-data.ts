@@ -1,5 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+// categories 
+// https://cache-mcd-middleware.mcdonaldscupones.com/api/product/list/categories
 
+
+// https://api-mcd-ecommerce-ar.appmcdonalds.com/catalog/product/26942/detail?area=MOP&restaurant=6197a005c6ad5f1260abd795&category=adsa-ar-high+competitive-900510&outdaypart=true
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use server'
 
 import fs from 'fs';

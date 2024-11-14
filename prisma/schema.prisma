@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -15,23 +9,56 @@ datasource db {
 
 model Category {
   id       String    @id @default(uuid())
-  name     String    @unique
-  slug     String
+  name     String    
+  slug     String    @unique
   imageUrl String
   active   Boolean
-  Product  Product[]
+  products Product[]
+
+  @@map("categories")
 }
 
 model Product {
-  id          String @id @default(uuid())
-  name        String
-  identifier  String
-  price       Float  @default(0)
-  imageUrl    String
-  slug        String
-  description String
+  id            String         @id @default(uuid())
+  name          String
+  identifier    String
+  price         Float          @default(0)
+  imageUrl      String
+  slug          String      
+  description   String
+  category      Category       @relation(fields: [categoryId], references: [id])
+  categoryId    String
+  optionsGroups OptionsGroup[] @relation("ProductOptionsGroups")
 
-  // Relaciones
-  category   Category @relation(fields: [categoryId], references: [id])
-  categoryId String
+  @@map("products")
+}
+
+model OptionsGroup {
+  id   String @id @default(uuid())
+  name String
+  min  Int
+  max  Int
+
+  products Product[] @relation("ProductOptionsGroups")
+  options  Option[]  @relation("OptionsGroupOptions")
+
+  parentId String? // Clave foránea opcional para la relación padre
+  parent   OptionsGroup? @relation("ParentChildOptionsGroup", fields: [parentId], references: [id])
+
+  children OptionsGroup[] @relation("ParentChildOptionsGroup")
+
+  @@map("options_groups")
+}
+
+model Option {
+  id            String         @id @default(uuid())
+  name          String
+  min           Int
+  max           Int
+  available     Boolean
+  price         Float
+  imageUrl      String?
+  optionsGroups OptionsGroup[] @relation("OptionsGroupOptions")
+
+  @@map("options")
 }
