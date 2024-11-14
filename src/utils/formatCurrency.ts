@@ -8,5 +8,5 @@ export const formatCurrency = (price: number) => {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
         currencyDisplay: 'narrowSymbol', 
-    }).format(price / 10);
+    }).format(price / 100);
 }

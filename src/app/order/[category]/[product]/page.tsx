@@ -1,3 +1,4 @@
+import { ProductToCart } from "../../components/products/ProductToCart";
 
 interface Props {
     params: Promise<{ product: string }>
@@ -12,9 +13,6 @@ interface Props {
 
 
     return (
-        <div>
-            {productSlug}
-
-        </div>
+        <ProductToCart productSlug={productSlug}/> 
       );
   }

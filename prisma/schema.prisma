@@ -9,7 +9,7 @@ datasource db {
 
 model Category {
   id       String    @id @default(uuid())
-  name     String    
+  name     String
   slug     String    @unique
   imageUrl String
   active   Boolean
@@ -24,7 +24,7 @@ model Product {
   identifier    String
   price         Float          @default(0)
   imageUrl      String
-  slug          String      
+  slug          String         @unique
   description   String
   category      Category       @relation(fields: [categoryId], references: [id])
   categoryId    String

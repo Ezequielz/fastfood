@@ -7,12 +7,12 @@ interface Props {
 }
 export const CategoryCard = ({ category }: Props) => {
   return (
-
+    
     <Link
       href={`/order/${category.slug}`}
-      className="hover:scale-105 block"
+      className="hover:scale-105 m-auto"
     >
-      <div className=" md: flex w-[5.5rem] flex-col items-center p-2 md:w-full md:max-w-[6.5rem]">
+      <div className=" md: flex w-[5.5rem] flex-col justify-center items-center p-2 md:w-full md:max-w-[6.5rem]">
 
 
         <CategoryIcon

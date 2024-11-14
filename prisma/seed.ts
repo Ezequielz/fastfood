@@ -39,7 +39,7 @@ async function main() {
         const prodCreated = await prisma.product.create({
           data: {
             ...rest,
-            slug: formatText(product.name),
+            slug: formatText(product.name, product.category),
             categoryId: categoriesMap[formatText(category)],
           },
         });

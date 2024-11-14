@@ -6,6 +6,7 @@ export const OrderNavbar = async () => {
 
 
   return (
+   
     <Suspense fallback={<div>Cargando...</div>}>
       <CategoryList />
     </Suspense>

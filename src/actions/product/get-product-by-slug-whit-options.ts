@@ -1,10 +1,12 @@
 // app/actions/getProduct.ts
 import prisma from '@/lib/prisma';
 
-export async function getProductByIdWithOptionsGroups(productId: string) {
+
+export async function getProductBySlugWithOptionsGroups(productSlug: string) {
+
     try {
         const product = await prisma.product.findUnique({
-            where: { id: productId },
+            where: { slug: productSlug },
             include: {
                 optionsGroups: {
                     include: {
