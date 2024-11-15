@@ -11,7 +11,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 
             <OrderNavbar />
             <div className="md:flex">
-                <main className="md:flex-1 md:h-screen md:overflow-y-scroll p-5">
+                <main className="md:flex-1 md:h-screen md:overflow-y-scroll px-5">
                     {children}
                 </main>
                 {/* <OrderSummary /> */}

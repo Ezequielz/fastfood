@@ -22,7 +22,7 @@ export const CategoryCard = ({ category }: Props) => {
         />
 
 
-        <p className="min-h-[32px] text-center text-xs md:text-sm">
+        <p className="min-h-[32px] text-center text-[10px] 2xl:text-sm">
           {category.name}
         </p>
 

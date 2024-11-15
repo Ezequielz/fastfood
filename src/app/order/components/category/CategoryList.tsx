@@ -22,8 +22,8 @@ export const CategoryList = async () => {
     <nav className="mt-10 ">
 
       <div
-        className="grid gap-4 m-auto px-6"
-        style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(80px, 2fr))' }}
+        className="grid gap-4 m-auto px-10 bg-red-500/10"
+        style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(65px, 2fr))' }}
       >
         {
           categories!.map(category => (

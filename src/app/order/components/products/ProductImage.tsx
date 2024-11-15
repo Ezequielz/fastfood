@@ -5,15 +5,17 @@ interface Props {
   url: string;
   alt: string
   className?: string
+  h?: number
+  w?: number
 }
-export const ProductImage = ({ alt, url, className }: Props) => {
+export const ProductImage = ({ alt, url, className, h = 200, w = 200 }: Props) => {
 
   return (
     <figure className={`${className ? className : ''} relative m-auto w-full`}>
 
       <Image
-        height={200}
-        width={200}
+        height={h}
+        width={w}
         src={url}
         alt={`imagen de la categoria ${alt}`}
         unoptimized
