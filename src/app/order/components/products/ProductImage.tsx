@@ -16,9 +16,10 @@ export const ProductImage = ({ alt, url, className, h = 200, w = 200 }: Props) =
       <Image
         height={h}
         width={w}
-        src={url}
+        src={url ?? '/images/placeholder.jpg'}
         alt={`imagen de la categoria ${alt}`}
         unoptimized
+        quality={75}
         className=""
 
       />

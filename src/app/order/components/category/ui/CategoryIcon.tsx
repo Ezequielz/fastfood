@@ -1,6 +1,7 @@
 
 import Image from "next/image"
 
+
 interface Props {
   url: string;
   alt: string
@@ -12,8 +13,10 @@ export const CategoryIcon = ({ alt, url }: Props) => {
 
       <Image
         fill
-        src={url}
+        src={url ?? '/images/placeholder.jpg'}
         alt={`imagen de la categoria ${alt}`}
+        quality={75}
+        unoptimized
 
       />
     </figure>

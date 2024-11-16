@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { ProductToCart } from "../../components/products/ProductToCart";
+import { ProductToOrder } from "../../components/products/ProductToOrder";
 
 interface Props {
   params: Promise<{ product: string }>
@@ -16,7 +16,8 @@ export default async function OrderCategoryPage({ params }: Props) {
   return (
     <Suspense fallback={<div>Cargando...</div>}>
 
-      <ProductToCart productSlug={productSlug} />
+      <ProductToOrder productSlug={productSlug} />
+
     </Suspense>
   );
 }

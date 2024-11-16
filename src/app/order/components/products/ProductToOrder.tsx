@@ -4,12 +4,16 @@ import { formatCurrency } from "@/utils/formatCurrency";
 
 import { ProductImage } from "./ProductImage";
 
+import { OptionsGroups } from "./options/OptionsGroups";
+import { QuantityButtons } from "../ui/QuantityButtons";
+import { AddToOrder } from "../ui/AddToOrder";
+
 
 
 interface Props {
   productSlug: string
 }
-export const ProductToCart = async ({ productSlug }: Props) => {
+export const ProductToOrder = async ({ productSlug }: Props) => {
 
   const { ok, product } = await getProductBySlugWithOptionsGroups(productSlug)
 
@@ -19,25 +23,21 @@ export const ProductToCart = async ({ productSlug }: Props) => {
     )
   }
   return (
-    <section className="mx-auto flex flex-col gap-5 p-5 pb-[9rem] md:grid md:w-[100%] md:grid-cols-[40%_1fr_55%] md:grid-rows-1 md:justify-center md:gap-0 lg:w-[75%]">
+    <section className="mx-auto flex flex-col gap-5 p-5  md:grid md:w-[100%] md:grid-cols-[40%_1fr_55%] md:grid-rows-1 md:justify-center md:gap-0 lg:w-[75%]">
       <div className="w-full md:col-span-1 ">
         <div className="flex w-full flex-col md:sticky md:top-[9rem]">
 
           <ProductImage
             alt={product!.name}
-            url={product!.imageUrl}
+            url={product!.imageUrl ?? '/images/placeholder.jpg'}
             w={300}
             h={200}
             className="flex h-auto w-9/12 self-center"
           />
           <div className="md:px-4 lg:px-10">
-            <section className="fixed bottom-0 left-0 z-[9] w-full rounded-t-3xl bg-white shadow-elevation-up md:relative md:rounded-none md:shadow-none">
+            <section className="px-5 fixed bottom-0 left-0 z-[9] w-full rounded-t-3xl bg-white shadow-elevation-up md:relative md:rounded-none md:shadow-none">
               <div className="my-4 flex flex-row items-center justify-between gap-2 px-4 md:p-0">
-                <div className="my-2 flex items-center justify-between rounded-2xl border border-gray-500 p-2 store-quantity-selector--small">
-                  <button>-</button>
-                  <div>1</div>
-                  <button>+</button>
-                </div>
+                <QuantityButtons />
 
                 <div className="flex flex-row flex-nowrap gap-2 text-2xl md:flex-wrap md:text-3xl">
                   <p className="font-bold md:ml-auto"> {formatCurrency(product!.price)} </p>
@@ -47,7 +47,13 @@ export const ProductToCart = async ({ productSlug }: Props) => {
 
 
             </section>
+
           </div>
+
+          <div className="flex justify-center">
+            <AddToOrder />
+          </div>
+
         </div>
       </div>
       <div className="flex w-full flex-col md:col-start-3 md:col-end-35">
@@ -106,25 +112,18 @@ export const ProductToCart = async ({ productSlug }: Props) => {
             Personaliza tu producto
 
           </h3>
-          {product!.optionsGroups.map(optionGoup => (
-            <div className="mb-4" key={optionGoup.id}>
-              <div className="flex w-full flex-col gap-2">
-                <p className="text-sm font-bold">
-                  {optionGoup.name}
-                </p>
-                <p className="cursor-pointer text-xs text-mcd-secondaryDarkGrey underline">
-                  Personalizar
-                </p>
-              </div>
-            </div>
 
-          ))}
+          <OptionsGroups optionsGroups={product!.optionsGroups} />
 
 
         </section>
 
 
+
+
       </div>
+
+
 
     </section>
   )
