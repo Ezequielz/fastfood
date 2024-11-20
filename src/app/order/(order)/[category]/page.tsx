@@ -1,6 +1,7 @@
 import { getCategorieBySlug } from "@/actions/category/get-category-by-slug";
-import { ProductsByCategoryList } from "../components/products/ProductsByCategoryList";
+
 import { Suspense } from "react";
+import { ProductsByCategoryList } from "../../components/products/ProductsByCategoryList";
 
 
 

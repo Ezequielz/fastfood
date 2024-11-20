@@ -1,5 +1,7 @@
-import { OrderNavbar } from "./components/OrderNavbar";
-import { OrderSummary } from "./components/OrderSummary";
+import { OrderDetail } from "../components/OrderDetail";
+import { OrderNavbar } from "../components/OrderNavbar";
+
+
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     return (
@@ -12,7 +14,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                 </main>
              
             </div>
-            <OrderSummary />
+            <OrderDetail />
         </>
     )
 }

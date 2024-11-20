@@ -3,7 +3,7 @@ import { OrderProduct, ProductOption } from '@/interfaces/order';
 import { Product } from '@prisma/client';
 
 interface State {
-    isOrderSummaryOpen: boolean;
+    isOrderDetailOpen: boolean;
     order: OrderProduct[];
     productToOrder: OrderProduct | null;
     // Methods
@@ -25,15 +25,15 @@ interface State {
 
 
     //UI
-    openOrderSummary: () => void;
-    closeOrderSummary: () => void;
+    openOrderDetail: () => void;
+    closeOrderDetail: () => void;
 
 
 }
 
 
 export const useOrderStore = create<State>()((set, get) => ({
-    isOrderSummaryOpen: false,
+    isOrderDetailOpen: false,
     order: [],
     productToOrder: null,
 
@@ -216,10 +216,10 @@ export const useOrderStore = create<State>()((set, get) => ({
 
 
     // UI Order
-    openOrderSummary: () => {
-        set({ isOrderSummaryOpen: true });
+    openOrderDetail: () => {
+        set({ isOrderDetailOpen: true });
     },
-    closeOrderSummary: () => {
-        set({ isOrderSummaryOpen: false });
+    closeOrderDetail: () => {
+        set({ isOrderDetailOpen: false });
     }
 }));

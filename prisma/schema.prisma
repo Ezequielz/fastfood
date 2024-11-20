@@ -19,16 +19,17 @@ model Category {
 }
 
 model Product {
-  id            String         @id @default(uuid())
+  id            String          @id @default(uuid())
   name          String
   identifier    String
-  price         Float          @default(0)
+  price         Float           @default(0)
   imageUrl      String
-  slug          String         @unique
+  slug          String          @unique
   description   String
-  category      Category       @relation(fields: [categoryId], references: [id])
+  category      Category        @relation(fields: [categoryId], references: [id])
   categoryId    String
-  optionsGroups OptionsGroup[] @relation("ProductOptionsGroups")
+  optionsGroups OptionsGroup[]  @relation("ProductOptionsGroups")
+  OrderProducts OrderProducts[]
 
   @@map("products")
 }
@@ -61,4 +62,24 @@ model Option {
   optionsGroups OptionsGroup[] @relation("OptionsGroupOptions")
 
   @@map("options")
+}
+
+model Order {
+  id            String          @id @default(uuid())
+  name          String
+  total         Float
+  date          DateTime        @default(now())
+  status        Boolean         @default(false)
+  orderReadyAt  DateTime?
+  OrderProducts OrderProducts[]
+}
+
+model OrderProducts {
+  id String @id @default(uuid())
+
+  order   Order  @relation(fields: [orderId], references: [id])
+  orderId String
+
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
 }

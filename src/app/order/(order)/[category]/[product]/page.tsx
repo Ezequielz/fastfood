@@ -1,5 +1,6 @@
+import { ProductToOrder } from "@/app/order/components/products/ProductToOrder";
 import { Suspense } from "react";
-import { ProductToOrder } from "../../components/products/ProductToOrder";
+
 
 interface Props {
   params: Promise<{ product: string }>

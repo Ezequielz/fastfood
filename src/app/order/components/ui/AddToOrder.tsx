@@ -20,7 +20,7 @@ export const AddToOrder = ({ product }: Props) => {
   const productToOrder = useOrderStore(state => state.productToOrder);
   const order = useOrderStore(state => state.order);
 
-  const openOrderSummary = useOrderStore(state => state.openOrderSummary);
+  const openOrderDetail = useOrderStore(state => state.openOrderDetail);
   const addProductToOrder = useOrderStore(state => state.addProductToOrder);
   const setProductToOrder = useOrderStore(state => state.setProductToOrder);
 
@@ -43,7 +43,7 @@ export const AddToOrder = ({ product }: Props) => {
     if (!productToOrder) return;
     // console.log(productToOrder)
     addProductToOrder(productToOrder)
-    openOrderSummary()
+    openOrderDetail()
   }
 
   if (!productToOrder) return null
@@ -56,7 +56,7 @@ export const AddToOrder = ({ product }: Props) => {
         Ya tienes este producto en la
         <span
           className="font-bold text-amber-500 underline cursor-pointer ml-2"
-          onClick={openOrderSummary}
+          onClick={openOrderDetail}
         >
 
           orden
