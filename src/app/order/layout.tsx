@@ -1,5 +1,5 @@
-import { OrderDetail } from "../components/OrderDetail";
-import { OrderNavbar } from "../components/OrderNavbar";
+import { OrderDetail } from "./components/order/OrderDetail";
+import { OrderNavbar } from "./components/order/OrderNavbar";
 
 
 

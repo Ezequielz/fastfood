@@ -22,6 +22,7 @@ interface State {
     increaseProductOrderQuantity: (id: Product['id']) => void;
     decreaseProductOrderQuantity: (id: Product['id']) => void;
     removeProductFromOrder: (id: Product['id']) => void;
+    clearOrder : () => void;
 
 
     //UI
@@ -214,6 +215,10 @@ export const useOrderStore = create<State>()((set, get) => ({
 
     },
 
+
+    clearOrder: () => {
+        set({ order: [] });
+    },
 
     // UI Order
     openOrderDetail: () => {

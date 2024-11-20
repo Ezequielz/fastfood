@@ -8,24 +8,28 @@ datasource db {
 }
 
 model Category {
-  id       String    @id @default(uuid())
+  id       String  @id @default(uuid())
   name     String
-  slug     String    @unique
+  slug     String  @unique
   imageUrl String
   active   Boolean
+
+  // Relaciones
   products Product[]
 
   @@map("categories")
 }
 
 model Product {
-  id            String          @id @default(uuid())
-  name          String
-  identifier    String
-  price         Float           @default(0)
-  imageUrl      String
-  slug          String          @unique
-  description   String
+  id          String @id @default(uuid())
+  name        String
+  identifier  String
+  price       Float  @default(0)
+  imageUrl    String
+  slug        String @unique
+  description String
+
+  // Relaciones
   category      Category        @relation(fields: [categoryId], references: [id])
   categoryId    String
   optionsGroups OptionsGroup[]  @relation("ProductOptionsGroups")
@@ -40,10 +44,11 @@ model OptionsGroup {
   min  Int
   max  Int
 
+  // Relaciones
   products Product[] @relation("ProductOptionsGroups")
   options  Option[]  @relation("OptionsGroupOptions")
 
-  parentId String? // Clave foránea opcional para la relación padre
+  parentId String?
   parent   OptionsGroup? @relation("ParentChildOptionsGroup", fields: [parentId], references: [id])
 
   children OptionsGroup[] @relation("ParentChildOptionsGroup")
@@ -52,34 +57,59 @@ model OptionsGroup {
 }
 
 model Option {
-  id            String         @id @default(uuid())
-  name          String
-  min           Int
-  max           Int
-  available     Boolean
-  price         Float
-  imageUrl      String?
-  optionsGroups OptionsGroup[] @relation("OptionsGroupOptions")
+  id        String  @id @default(uuid())
+  name      String
+  min       Int
+  max       Int
+  available Boolean
+  price     Float
+  imageUrl  String?
+
+  // Relaciones
+  optionsGroups       OptionsGroup[]       @relation("OptionsGroupOptions")
+  OrderProductOptions OrderProductOption[] // Relación con la tabla intermedia
 
   @@map("options")
 }
 
 model Order {
-  id            String          @id @default(uuid())
-  name          String
-  total         Float
-  date          DateTime        @default(now())
-  status        Boolean         @default(false)
-  orderReadyAt  DateTime?
+  id           String    @id @default(uuid())
+  ordenNumber  Int       @default(autoincrement())
+  total        Float
+  createdAt    DateTime  @default(now())
+  status       Boolean   @default(false)
+  orderReadyAt DateTime?
+
+  // Relaciones
   OrderProducts OrderProducts[]
+
+  @@map("orders")
 }
 
 model OrderProducts {
-  id String @id @default(uuid())
-
-  order   Order  @relation(fields: [orderId], references: [id])
-  orderId String
+  id       String @id @default(uuid())
+  quantity Int    @default(1)
+  subtotal Float
+  // Relaciones
+  orderId  String
+  order    Order  @relation(fields: [orderId], references: [id])
 
   productId String
   product   Product @relation(fields: [productId], references: [id])
+
+  options OrderProductOption[]
+
+  @@map("order_products")
+}
+
+model OrderProductOption {
+  id String @id @default(uuid())
+
+  // Relaciones
+  orderProductId String
+  orderProduct   OrderProducts @relation(fields: [orderProductId], references: [id])
+  optionId       String
+  option         Option        @relation(fields: [optionId], references: [id])
+
+  @@map("order_product_options")
 }

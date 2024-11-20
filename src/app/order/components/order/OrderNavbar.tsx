@@ -1,6 +1,6 @@
 
 import { Suspense } from "react";
-import { CategoryList } from "./category/CategoryList";
+import { CategoryList } from "../category/CategoryList";
 
 export const OrderNavbar = async () => {
 

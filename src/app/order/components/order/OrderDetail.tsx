@@ -4,19 +4,47 @@ import { useOrderStore } from '@/store/order/order-store';
 import clsx from 'clsx';
 
 import { IoCloseOutline } from 'react-icons/io5';
-import { OrderProductDetails } from './OrderProductDetails';
+
 import { formatCurrency } from '@/utils/formatCurrency';
 import { useMemo } from 'react';
-import Link from 'next/link';
+
+import { OrderProductDetails } from './OrderProductDetails';
+import { createOrder } from '@/actions/order/create-order';
+import { useRouter } from 'next/navigation';
+
 
 
 export const OrderDetail = () => {
 
+    const router = useRouter()
     const order = useOrderStore(state => state.order);
     const isOrderDetailOpen = useOrderStore(state => state.isOrderDetailOpen);
-    const closeOrderDetail = useOrderStore(state => state.closeOrderDetail);
 
+    const closeOrderDetail = useOrderStore(state => state.closeOrderDetail);
+    const clearOrder = useOrderStore(state => state.clearOrder);
     const totalPrice = useMemo(() => order.reduce((acc, product) => acc + (product.subtotal), 0), [order])
+
+    const handleCreateOrder = async () => {
+        const newOrder = order.map((product) => ({
+            id: product.id,
+            price: product.price,
+            subtotal: product.subtotal,
+            quantity: product.quantity,
+            options: product.options.map((opt) => ({
+                id: opt.id,
+                quantity: opt.quantity,
+                price: opt.price,
+                subtotal: opt.subtotal,
+            })),
+        }));
+    
+        const {ok, orderCreated } = await createOrder({ newOrder, totalPrice });
+     
+        if (ok && orderCreated) 
+        router.push(`/withdraw/${orderCreated.id}`)
+        clearOrder()
+        closeOrderDetail();
+    };
 
     return (
         <div>
@@ -101,13 +129,13 @@ export const OrderDetail = () => {
                         </strong>
                     </p>
 
-                    <Link
-                        href='/order/summary'
+                    <button
+                     
                         className='px-4 py-2 bg-amber-500 hover:bg-amber-400 text-xl text-slate-100 rounded-lg'
-                        onClick={closeOrderDetail}
+                        onClick={handleCreateOrder}
                     >
                         Confirmar orden
-                    </Link>
+                    </button>
                 </footer>
 
             </aside>
