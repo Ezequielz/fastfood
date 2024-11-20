@@ -1,10 +1,9 @@
-import { Option, OptionsGroup } from "@prisma/client";
+
 import { Options } from "./Options";
+import { OptionsGroupWithRelations } from "@/interfaces/order";
 
 
-interface OptionsGroupWithRelations extends OptionsGroup {
-    options: Option[];
-}
+
 
 interface Props {
     optionsGroups: OptionsGroupWithRelations[];

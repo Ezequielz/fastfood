@@ -7,6 +7,7 @@ export async function getProductBySlugWithOptionsGroups(productSlug: string) {
     try {
         const product = await prisma.product.findUnique({
             where: { slug: productSlug },
+        
             include: {
                 optionsGroups: {
                     include: {
@@ -18,6 +19,11 @@ export async function getProductBySlugWithOptionsGroups(productSlug: string) {
                         },
                     },
                 },
+                category: {
+                    select: {
+                        slug: true
+                    }
+                }, 
             },
         });
 

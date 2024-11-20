@@ -1,12 +1,22 @@
 import Image from 'next/image'
 import { Option } from '@prisma/client';
-import { QuantityButtons } from '../../ui/QuantityButtons';
+import { QuantityOptionButton } from '../../ui/QuantityOptionButton';
+import { OptionInputSelect } from '../../ui/OptionInputSelect';
+// import { OptionSubtotal } from './OptionSubtotal';
+
 
 interface Props {
     option: Option;
 };
 
 export const OptionCard = ({ option }: Props) => {
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { available, ...restOpt } = option
+
+
+
+
     return (
         <article
             className='flex justify-between items-center rounded-lg border px-10 border-gray-200 bg-gray-200 p-3 text-sm transition hover:border-gray-300 hover:bg-gray-300'
@@ -23,20 +33,28 @@ export const OptionCard = ({ option }: Props) => {
                 />
                 {option.name}
             </div>
-            {
-                option.max > 1 ? (
-                    <QuantityButtons
-                        initialQuantity={option.min}
-                        min={option.min}
-                        max={option.max}
-                    />
-                ) : (
-                    <input
-                        type="checkbox"
-                        className='h-6 w-6'
-                    />
-                )
-            }
+            <div>
+
+                {
+                    option.max > 1 ? (
+                        <div className='flex gap-2 items-center'>
+                            {/* <OptionSubtotal option={option}/> */}
+
+                            <QuantityOptionButton
+                                key={option.id}
+                                option={{ ...restOpt, quantity: 0, subtotal: option.price }}
+
+                                min={option.min}
+                                max={option.max}
+
+                            />
+                        </div>
+
+                    ) : (
+                        <OptionInputSelect option={{ ...restOpt, quantity: 0, subtotal: option.price }}/>
+                    )
+                }
+            </div>
 
 
         </article>

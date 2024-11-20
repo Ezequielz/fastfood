@@ -11,7 +11,7 @@ interface Props {
 export const ProductImage = ({ alt, url, className, h = 200, w = 200 }: Props) => {
 
   return (
-    <figure className={`${className ? className : ''} relative m-auto w-full`}>
+    <figure className={`${className ? className : ''} relative flex justify-center w-full`}>
 
       <Image
         height={h}
