@@ -39,6 +39,7 @@ export const createOrder = async ({ newOrder, totalPrice }: Props) => {
       data: {
         total: totalPrice,
         status: false,
+        quantityProducts: newOrder.reduce((total, product) => total + product.quantity,  0 ),
         OrderProducts: {
           create: newOrder.map((product) => ({
             productId: product.id,

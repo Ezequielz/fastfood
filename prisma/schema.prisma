@@ -73,12 +73,13 @@ model Option {
 }
 
 model Order {
-  id           String    @id @default(uuid())
-  ordenNumber  Int       @default(autoincrement())
-  total        Float
-  createdAt    DateTime  @default(now())
-  status       Boolean   @default(false)
-  orderReadyAt DateTime?
+  id               String    @id @default(uuid())
+  ordenNumber      Int       @default(autoincrement())
+  total            Float
+  quantityProducts Int
+  createdAt        DateTime  @default(now())
+  status           Boolean   @default(false)
+  orderReadyAt     DateTime?
 
   // Relaciones
   OrderProducts OrderProducts[]
