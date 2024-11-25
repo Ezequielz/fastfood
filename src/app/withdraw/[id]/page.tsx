@@ -1,12 +1,13 @@
 import { getOrderById } from "@/actions/order/get-order-by-id";
 import { formatCurrency } from "@/utils/formatCurrency";
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function OrderWhithWraw({ params }: { params: { id: string } }) {
   const { id } = params;
 
   const { ok, order } = await getOrderById(id);
-  
+
   if (!ok || !order) {
     return (
       <div className="w-full max-w-2xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-lg text-center">
@@ -21,8 +22,8 @@ export default async function OrderWhithWraw({ params }: { params: { id: string 
       {/* Header */}
       <div className="flex items-center justify-between border-b pb-4 mb-6">
         <h1 className="text-3xl font-bold text-red-600">Orden #{order.ordenNumber}</h1>
-        <span className={`px-4 py-2 text-sm font-semibold rounded-full ${order.status ? 'bg-green-500 text-white' : 'bg-yellow-500 text-gray-800'}`}>
-          {order.status}
+        <span className='px-4 py-2 text-sm font-semibold rounded-full bg-green-500 text-white'>
+          Retirar pedido en mostrador
         </span>
       </div>
 
@@ -67,11 +68,13 @@ export default async function OrderWhithWraw({ params }: { params: { id: string 
       </div>
 
       {/* Footer */}
-      {/* <div className="mt-6 text-center">
-        <button className="w-full py-3 bg-yellow-600 text-white rounded-lg hover:bg-yellow-500 transition duration-300">
-          Confirmar Pedido
-        </button>
-      </div> */}
+      <div className="mt-6 text-center">
+        <Link
+          href={`/`}
+          className="w-full px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-500 transition duration-300">
+          Volver al inicio
+        </Link>
+      </div>
     </div>
   );
 }

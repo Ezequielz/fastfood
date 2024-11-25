@@ -72,13 +72,20 @@ model Option {
   @@map("options")
 }
 
+
+enum Status {
+  pending
+  delivered
+  cancel
+  done
+}
 model Order {
   id               String    @id @default(uuid())
   ordenNumber      Int       @default(autoincrement())
   total            Float
   quantityProducts Int
   createdAt        DateTime  @default(now())
-  status           Boolean   @default(false)
+  status           Status @default(pending)
   orderReadyAt     DateTime?
 
   // Relaciones
@@ -86,6 +93,7 @@ model Order {
 
   @@map("orders")
 }
+
 
 model OrderProducts {
   id       String @id @default(uuid())

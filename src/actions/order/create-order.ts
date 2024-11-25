@@ -2,6 +2,8 @@
 
 import prisma from '@/lib/prisma';
 
+
+
 interface Props {
   newOrder: Product[];
   totalPrice: number;
@@ -23,7 +25,7 @@ type Option = {
 };
 
 export const createOrder = async ({ newOrder, totalPrice }: Props) => {
-  console.log(newOrder)
+ 
   try {
 
     if (!newOrder || newOrder.length === 0) {
@@ -38,7 +40,6 @@ export const createOrder = async ({ newOrder, totalPrice }: Props) => {
     const orderCreated = await prisma.order.create({
       data: {
         total: totalPrice,
-        status: false,
         quantityProducts: newOrder.reduce((total, product) => total + product.quantity,  0 ),
         OrderProducts: {
           create: newOrder.map((product) => ({

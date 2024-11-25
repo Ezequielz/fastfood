@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import { IoCloseOutline } from 'react-icons/io5';
 
 import { formatCurrency } from '@/utils/formatCurrency';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
 import { OrderProductDetails } from './OrderProductDetails';
 import { createOrder } from '@/actions/order/create-order';
@@ -19,31 +19,39 @@ export const OrderDetail = () => {
     const router = useRouter()
     const order = useOrderStore(state => state.order);
     const isOrderDetailOpen = useOrderStore(state => state.isOrderDetailOpen);
+    const [creatingOrder, setCreatingOrder] = useState(false)
 
     const closeOrderDetail = useOrderStore(state => state.closeOrderDetail);
     const clearOrder = useOrderStore(state => state.clearOrder);
     const totalPrice = useMemo(() => order.reduce((acc, product) => acc + (product.subtotal), 0), [order])
 
     const handleCreateOrder = async () => {
+        setCreatingOrder(true);
         const newOrder = order.map((product) => ({
             id: product.id,
             price: product.price,
             subtotal: product.subtotal,
             quantity: product.quantity,
+            
             options: product.options.map((opt) => ({
                 id: opt.id,
                 quantity: opt.quantity,
                 price: opt.price,
                 subtotal: opt.subtotal,
+
             })),
         }));
-    
-        const {ok, orderCreated } = await createOrder({ newOrder, totalPrice });
-     
-        if (ok && orderCreated) 
-        router.push(`/withdraw/${orderCreated.id}`)
-        clearOrder()
-        closeOrderDetail();
+
+        const { ok, orderCreated } = await createOrder({ newOrder, totalPrice });
+
+        if (ok && orderCreated) {
+            setCreatingOrder(false);
+            router.push(`/withdraw/${orderCreated.id}`)
+            clearOrder()
+            closeOrderDetail();
+        }
+
+        setCreatingOrder(false);
     };
 
     return (
@@ -128,14 +136,25 @@ export const OrderDetail = () => {
                             {formatCurrency(totalPrice)}
                         </strong>
                     </p>
+                    {
+                        !creatingOrder ? (
+                            <button
 
-                    <button
-                     
-                        className='px-4 py-2 bg-amber-500 hover:bg-amber-400 text-xl text-slate-100 rounded-lg'
-                        onClick={handleCreateOrder}
-                    >
-                        Confirmar orden
-                    </button>
+                                className='px-4 py-2 bg-amber-500 hover:bg-amber-400 text-xl text-slate-100 rounded-lg'
+                                onClick={handleCreateOrder}
+                            >
+                                Confirmar orden
+                            </button>
+                        ) : (
+                            <button
+                                className='px-4 py-2 bg-amber-500 text-xl text-slate-100 rounded-lg'
+                                disabled
+                            >
+                                Creando orden...
+                            </button>
+                        )
+                    }
+
                 </footer>
 
             </aside>

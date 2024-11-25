@@ -8,7 +8,7 @@ export const CategoryList = async () => {
 
   const { ok, categories } = await getCategories();
 
-  if (!ok) {
+  if (!ok ) {
     return (
       <aside className="md:w-72 md:h-screen bg-white">
         <div className="p-5">
