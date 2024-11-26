@@ -60,7 +60,11 @@ export const createOrder = async ({ newOrder, totalPrice }: Props) => {
 
     });
 
+    revalidatePath('/')
+    revalidatePath('/admin')
     revalidatePath('/admin/kitchen')
+    revalidatePath('/admin/orders')
+    revalidatePath('/admin/delivery')
     // Retornar la orden creada
     return {
       ok: true,

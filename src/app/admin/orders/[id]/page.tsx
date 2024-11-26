@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { AdminOrder } from "./components/AdminOrder";
+import { AdminOrder } from "../components/AdminOrder";
 
 
 

@@ -8,10 +8,15 @@ async function main() {
   const { categories, products } = initialData;
 
   try {
+    await prisma.orderProductOption.deleteMany();
+    await prisma.orderProducts.deleteMany();
+    await prisma.order.deleteMany();
+
     await prisma.product.deleteMany();
     await prisma.category.deleteMany();
     await prisma.optionsGroup.deleteMany();
     await prisma.option.deleteMany();
+ 
 
     // Formateo de slug de categorías
     const categoryWithSlugFormatted = categories.map((category) => ({

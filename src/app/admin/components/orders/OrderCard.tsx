@@ -54,8 +54,8 @@ export const OrderCard = async ({ order }: Props) => {
       </ul>
 
       <ChangeOrderStatusBtn 
-        order={order}
-        
+        orderId={order.id}
+        orderStatus={order.status}
       >
         <span className="font-bold">Orden Lista</span>
       </ChangeOrderStatusBtn>

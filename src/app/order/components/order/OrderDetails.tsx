@@ -2,16 +2,19 @@
 
 import { getOrderById } from "@/actions/order/get-order-by-id"
 import { formatCurrency } from "@/utils/formatCurrency"
+import { Status } from "@prisma/client";
+import clsx from "clsx";
 
 
 import Image from "next/image"
 
 interface Props {
-    orderId: string
+    orderId: string;
+    showStatus?: boolean
 }
 
 
-export const OrderDetails = async ({ orderId }: Props) => {
+export const OrderDetails = async ({ orderId, showStatus }: Props) => {
     const { ok, order } = await getOrderById(orderId)
 
     if (!ok || !order) {
@@ -19,10 +22,30 @@ export const OrderDetails = async ({ orderId }: Props) => {
     }
 
     return (
-        <article className="space-y-6">
-            <header className="flex gap-2 items-center">
-                <h1 className="text-3xl font-bold">Orden</h1>
-                <span className="text-3xl font-bold">- {order.ordenNumber}</span>
+        <article className="space-y-6 p-2">
+            <header className="flex gap-2 items-center justify-between">
+                <div className="flex items-center gap-2">
+                    <span className="text-xl font-medium text-gray-700">Order</span>
+                    <span className="text-xl font-semibold text-gray-800">Nº {order.ordenNumber}</span>
+                </div>
+                {
+                    showStatus && (
+                        <span className={
+                            clsx(
+                                "px-4 py-2 text-sm font-semibold rounded-full  text-white",
+                                {
+                                    "bg-red-500 hover:bg-red-600": order.status === Status.cancel,
+                                    "bg-yellow-500 hover:bg-yellow-600": order.status === Status.pending,
+                                    "bg-green-500 hover:bg-green-600": order.status === Status.done,
+                                    "bg-blue-500 hover:bg-blue-600": order.status === Status.delivered,
+                                    "bg-cyan-500 hover:bg-cyan-600": order.status === Status.creating,
+                                }
+                            )
+                        }>
+                            {order.status}
+                        </span>
+                    )
+                }
 
             </header>
             <div className="flex justify-between items-center">

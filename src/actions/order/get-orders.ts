@@ -5,7 +5,7 @@ import { Order, Status } from '@prisma/client';
 
 
 
-export const getOrders = async ( status : Status | undefined) => {
+export const getOrders = async ( status? : Status ) => {
     
    
     try {

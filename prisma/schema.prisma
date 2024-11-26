@@ -74,10 +74,10 @@ model Option {
 
 enum Status {
   pending
-  delivered
-  cancel
   creating
   done
+  delivered
+  cancel
 }
 
 model Order {

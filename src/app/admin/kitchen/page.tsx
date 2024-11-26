@@ -1,6 +1,7 @@
 
 import { OrdersWithDetailsList } from "../components/orders/OrdersWithDetailsList";
 import { OrdersList } from "../components/orders/OrdersList";
+import { Status } from "@prisma/client";
 
 
 export default function KitchenPage() {
@@ -19,7 +20,7 @@ export default function KitchenPage() {
           
           <h2 className="text-xl font-semibold">Ordenes pendientes</h2>
           <hr className="border-2 border-slate-200 my-2"/>
-          <OrdersList />
+          <OrdersList status={Status.pending}/>
         </div>
       </div>
     </section>

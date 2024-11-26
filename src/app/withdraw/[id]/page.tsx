@@ -7,7 +7,7 @@ export default async function OrderWhithWraw({ params }: { params: { id: string 
   const { id: orderId } = params;
 
   return (
-    <div className="w-full max-w-2xl mx-auto mt-8 p-2 bg-white rounded-lg shadow-lg">
+    <article className="w-full max-w-2xl mx-auto mt-8 p-2 bg-white rounded-lg shadow-lg">
       {/* Header */}
       <div className="flex items-center justify-end border-b pb-2">
         {/* <h1 className="text-3xl font-bold text-red-600">Orden </h1> */}
@@ -27,6 +27,6 @@ export default async function OrderWhithWraw({ params }: { params: { id: string 
           Volver al inicio
         </Link>
       </div>
-    </div>
+    </article>
   );
 }
