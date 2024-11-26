@@ -13,9 +13,9 @@ export default function Home() {
           Order
         </Link></li>
         <li>    <Link
-          href={'/admin/kitchen'}
+          href={'/admin'}
         >
-          Kitchen
+          Admin
         </Link></li>
 
       </ul>

@@ -1,9 +1,10 @@
 import { create } from 'zustand';
-import { OrderProduct, ProductOption } from '@/interfaces/order';
+import { OrderProduct } from '@/interfaces/order';
 import { Product } from '@prisma/client';
+import { ProductOption } from '@/interfaces/product';
 
 interface State {
-    isOrderDetailOpen: boolean;
+    isOrderSidebarDetailsOpen: boolean;
     order: OrderProduct[];
     productToOrder: OrderProduct | null;
     // Methods
@@ -26,15 +27,15 @@ interface State {
 
 
     //UI
-    openOrderDetail: () => void;
-    closeOrderDetail: () => void;
+    openOrderSidebarDetails: () => void;
+    closeOrderSidebarDetails: () => void;
 
 
 }
 
 
 export const useOrderStore = create<State>()((set, get) => ({
-    isOrderDetailOpen: false,
+    isOrderSidebarDetailsOpen: false,
     order: [],
     productToOrder: null,
 
@@ -221,10 +222,10 @@ export const useOrderStore = create<State>()((set, get) => ({
     },
 
     // UI Order
-    openOrderDetail: () => {
-        set({ isOrderDetailOpen: true });
+    openOrderSidebarDetails: () => {
+        set({ isOrderSidebarDetailsOpen: true });
     },
-    closeOrderDetail: () => {
-        set({ isOrderDetailOpen: false });
+    closeOrderSidebarDetails: () => {
+        set({ isOrderSidebarDetailsOpen: false });
     }
 }));

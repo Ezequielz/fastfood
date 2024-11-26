@@ -1,4 +1,4 @@
-import { OrderDetail } from "./components/order/OrderDetail";
+import { OrderSidebarDetails } from "./components/order/OrderSidebarDetails";
 import { OrderNavbar } from "./components/order/OrderNavbar";
 
 
@@ -14,7 +14,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                 </main>
              
             </div>
-            <OrderDetail />
+            <OrderSidebarDetails />
         </>
     )
 }

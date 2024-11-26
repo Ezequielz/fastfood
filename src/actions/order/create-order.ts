@@ -1,6 +1,7 @@
 'use server';
 
 import prisma from '@/lib/prisma';
+import { revalidatePath } from 'next/cache';
 
 
 
@@ -49,6 +50,8 @@ export const createOrder = async ({ newOrder, totalPrice }: Props) => {
             options: {
               create: product.options.map((option) => ({
                 optionId: option.id,
+                quantity: option.quantity,
+                subtotal: option.subtotal
               })),
             },
           })),
@@ -57,6 +60,7 @@ export const createOrder = async ({ newOrder, totalPrice }: Props) => {
 
     });
 
+    revalidatePath('/admin/kitchen')
     // Retornar la orden creada
     return {
       ok: true,

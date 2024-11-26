@@ -10,7 +10,7 @@ interface Props {
 //   const { category } = await params
 // }
 
-export default async function OrderCategoryPage({ params }: Props) {
+export default async function OrderProductPAge({ params }: Props) {
   const { product: productSlug } = await params;
 
 

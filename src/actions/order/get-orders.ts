@@ -1,34 +1,18 @@
 
 'use server'
 import prisma from '@/lib/prisma';
-import { Order } from '@prisma/client';
+import { Order, Status } from '@prisma/client';
 
-export const getOrders = async () => {
+
+
+export const getOrders = async ( status : Status | undefined) => {
     
-
+   
     try {
         
         const orders: Order[] = await prisma.order.findMany({
-
-            include: {
-
-                OrderProducts: {
-                    include: {
-                        product: {
-                            include: {
-                                category: true,
-                                optionsGroups: {
-                                    include: {
-                                        options: true
-                                    }
-                                },
-
-                                
-                            }
-                        }
-                    }
-                },
-
+            where: {
+                status: status
             }
         });
         return {

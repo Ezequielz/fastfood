@@ -1,11 +1,12 @@
 import { getOrders } from "@/actions/order/get-orders"
 import { OrderCard } from "./OrderCard";
+import { Status } from "@prisma/client";
 
 
-export const OrdersList = async() => {
+export const OrdersWithDetailsList = async() => {
 
-    const {ok, orders} = await getOrders();
-
+    const {ok, orders} = await getOrders(Status.creating);
+    
 
     if (!ok) {
         return (
@@ -19,6 +20,7 @@ export const OrdersList = async() => {
 
     {
         orders!.map( order => (
+            
             <OrderCard key={order.id} order={order} />
         ))
     }

@@ -72,20 +72,21 @@ model Option {
   @@map("options")
 }
 
-
 enum Status {
   pending
   delivered
   cancel
+  creating
   done
 }
+
 model Order {
   id               String    @id @default(uuid())
   ordenNumber      Int       @default(autoincrement())
   total            Float
   quantityProducts Int
   createdAt        DateTime  @default(now())
-  status           Status @default(pending)
+  status           Status    @default(pending)
   orderReadyAt     DateTime?
 
   // Relaciones
@@ -93,7 +94,6 @@ model Order {
 
   @@map("orders")
 }
-
 
 model OrderProducts {
   id       String @id @default(uuid())
@@ -112,8 +112,9 @@ model OrderProducts {
 }
 
 model OrderProductOption {
-  id String @id @default(uuid())
-
+  id             String        @id @default(uuid())
+  quantity       Int           @default(1)
+  subtotal       Float
   // Relaciones
   orderProductId String
   orderProduct   OrderProducts @relation(fields: [orderProductId], references: [id])

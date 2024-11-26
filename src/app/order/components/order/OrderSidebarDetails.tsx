@@ -14,14 +14,14 @@ import { useRouter } from 'next/navigation';
 
 
 
-export const OrderDetail = () => {
+export const OrderSidebarDetails = () => {
 
     const router = useRouter()
     const order = useOrderStore(state => state.order);
-    const isOrderDetailOpen = useOrderStore(state => state.isOrderDetailOpen);
+    const isOrderSidebarDetailsOpen = useOrderStore(state => state.isOrderSidebarDetailsOpen);
     const [creatingOrder, setCreatingOrder] = useState(false)
 
-    const closeOrderDetail = useOrderStore(state => state.closeOrderDetail);
+    const closeOrderSidebarDetails = useOrderStore(state => state.closeOrderSidebarDetails);
     const clearOrder = useOrderStore(state => state.clearOrder);
     const totalPrice = useMemo(() => order.reduce((acc, product) => acc + (product.subtotal), 0), [order])
 
@@ -48,7 +48,7 @@ export const OrderDetail = () => {
             setCreatingOrder(false);
             router.push(`/withdraw/${orderCreated.id}`)
             clearOrder()
-            closeOrderDetail();
+            closeOrderSidebarDetails();
         }
 
         setCreatingOrder(false);
@@ -59,7 +59,7 @@ export const OrderDetail = () => {
 
             {/* Background black */}
             {
-                isOrderDetailOpen && (
+                isOrderSidebarDetailsOpen && (
                     <div
                         className="fixed top-0 left-0 w-screen h-screen z-10 bg-black opacity-30"
                     />
@@ -70,9 +70,9 @@ export const OrderDetail = () => {
 
             {/* Blur */}
             {
-                isOrderDetailOpen && (
+                isOrderSidebarDetailsOpen && (
                     <div
-                        onClick={closeOrderDetail}
+                        onClick={closeOrderSidebarDetails}
                         className="fade-in fixed top-0 left-0 w-screen h-screen z-10 backdrop-filter backdrop-blur-sm"
                     />
 
@@ -85,7 +85,7 @@ export const OrderDetail = () => {
                     clsx(
                         "fixed  right-0 top-0 w-[500px] h-screen bg-white z-20 shadow-2xl transform transition-all duration-300",
                         {
-                            "translate-x-full": !isOrderDetailOpen
+                            "translate-x-full": !isOrderSidebarDetailsOpen
                         }
                     )
                 }>
@@ -100,7 +100,7 @@ export const OrderDetail = () => {
                     <IoCloseOutline
                         size={50}
                         className="absolute top-5 right-5 cursor-pointer"
-                        onClick={() => closeOrderDetail()}
+                        onClick={() => closeOrderSidebarDetails()}
                     />
 
                     <h3 className='text-4xl text-center font-black' >Mi pedido</h3>
