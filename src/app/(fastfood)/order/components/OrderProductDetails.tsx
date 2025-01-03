@@ -5,7 +5,7 @@ import { RiDeleteBin2Line } from "react-icons/ri";
 import { formatCurrency } from "@/utils/formatCurrency"
 import { OrderProduct } from '../../../../interfaces/order';
 import { useOrderStore } from "@/store/order/order-store";
-import { QuantityProductButtons } from "../ui/QuantityProductButtons";
+import { QuantityProductButtons } from "../../menu/components/ui/QuantityProductButtons";
 
 
 interface Props {

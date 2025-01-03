@@ -8,13 +8,14 @@ import { IoCloseOutline } from 'react-icons/io5';
 import { formatCurrency } from '@/utils/formatCurrency';
 import { useMemo, useState } from 'react';
 
-import { OrderProductDetails } from './OrderProductDetails';
+
 import { createOrder } from '@/actions/order/create-order';
 import { useRouter } from 'next/navigation';
+import { OrderProductDetails } from '@/app/(fastfood)/order/components/OrderProductDetails';
 
 
 
-export const OrderSidebarDetails = () => {
+export const SidebarOrder = () => {
 
     const router = useRouter()
     const order = useOrderStore(state => state.order);
@@ -46,7 +47,7 @@ export const OrderSidebarDetails = () => {
 
         if (ok && orderCreated) {
             setCreatingOrder(false);
-            router.push(`/withdraw/${orderCreated.id}`)
+            router.push(`/order/${orderCreated.id}`)
             clearOrder()
             closeOrderSidebarDetails();
         }

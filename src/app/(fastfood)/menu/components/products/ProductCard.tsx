@@ -13,7 +13,7 @@ export const ProductCard = ({ product, categorySlug }: Props) => {
 
         <Link
             className="hover-scale flex items-center cursor-pointer flex-col border-slate-200 border-2 overflow-hidden rounded-lg shadow-elevation-down"
-            href={`/order/${categorySlug}/${product.slug}`}
+            href={`/menu/${categorySlug}/${product.slug}`}
         >
 
             <div className=" md: flex flex-col  md:w-full">

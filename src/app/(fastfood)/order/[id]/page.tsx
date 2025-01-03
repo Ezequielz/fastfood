@@ -1,9 +1,9 @@
 
-import { OrderDetails } from "@/app/order/components/order/OrderDetails";
+import { OrderDetails } from "@/app/(fastfood)/order/components/OrderDetails";
 
 import Link from "next/link";
 
-export default async function OrderWhithWraw({ params }: { params: { id: string } }) {
+export default async function Order({ params }: { params: { id: string } }) {
   const { id: orderId } = params;
 
   return (

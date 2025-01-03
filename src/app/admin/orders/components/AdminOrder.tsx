@@ -1,6 +1,6 @@
 
 
-import { OrderDetails } from "@/app/order/components/order/OrderDetails"
+import { OrderDetails } from "@/app/(fastfood)/order/components/OrderDetails"
 import { Status } from "@prisma/client"
 import { ChangeOrderStatusBtn } from "../../components/orders/ChangeOrderStatusBtn"
 import clsx from "clsx"

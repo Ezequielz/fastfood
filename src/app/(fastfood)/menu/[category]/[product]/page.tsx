@@ -1,4 +1,4 @@
-import { ProductToOrder } from "@/app/order/components/products/ProductToOrder";
+import { ProductToOrder } from "@/app/(fastfood)/menu/components/products/ProductToOrder";
 import { Suspense } from "react";
 
 

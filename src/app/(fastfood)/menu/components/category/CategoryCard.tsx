@@ -14,7 +14,7 @@ export const CategoryCard = ({ category }: Props) => {
   return (
 
     <Link
-      href={`/order/${category.slug}`}
+      href={`/menu/${category.slug}`}
       className="hover:scale-105 m-auto"
     >
 
