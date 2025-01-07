@@ -23,7 +23,7 @@ export const ProductCard = ({ product, categorySlug }: Props) => {
                     key={product.id}
                     url={product.imageUrl ?? '/images/placeholder.jpg'}
                     alt={product.name}
-                    className="flex h-40 md:h-52 items-end justify-center bg-slate-200"
+                    className="flex h-40 md:h-52 items-end justify-center bg-slate-100"
                 />
 
 

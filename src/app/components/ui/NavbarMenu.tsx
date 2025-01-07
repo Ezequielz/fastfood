@@ -1,10 +1,14 @@
+import { Suspense } from 'react'
 import { CategoryList } from '@/app/(fastfood)/menu/components/category/CategoryList'
-import React, { Suspense } from 'react'
 
-export const NavbarMenu = () => {
+
+interface Props {
+    basic?: boolean
+}
+export const NavbarMenu = ({ basic }: Props) => {
     return (
         <Suspense fallback={<div>Cargando...</div>}>
-            <CategoryList />
+            <CategoryList basic={basic}  />
         </Suspense>
     )
 }

@@ -13,7 +13,7 @@ export default function MenuLayout({ children }: Readonly<{ children: React.Reac
 
             <NavbarMenu />
             <div className="md:flex">
-                <main className="md:flex-1 md:h-screen  px-5">
+                <main className="md:flex-1   px-5">
                     {children}
                 </main>
 

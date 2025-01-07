@@ -36,7 +36,7 @@ export default async function OrderCategoryPage({ params }: Props) {
 
 
   return (
-    <div className="p-5">
+    <div className="p-5 ">
 
       <h2 className="my-5 text-2xl font-bold md:text-3xl">{category!.name}</h2>
       <Suspense fallback={ <div>Cargando...</div> }>

@@ -12,6 +12,14 @@ const nextConfig: NextConfig = {
             protocol: 'https',
             hostname: 'd2umxhib5z7frz.cloudfront.net',
         },
+        {
+            protocol: 'https',
+            hostname: 'mcd-landings-q-static.appmcdonalds.com',
+        },
+        {
+            protocol: 'https',
+            hostname: 'mcd-landings-l-statics.appmcdonalds.com',
+        },
     ],
 },
 };

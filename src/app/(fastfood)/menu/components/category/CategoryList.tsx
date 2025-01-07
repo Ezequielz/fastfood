@@ -2,13 +2,17 @@
 import { CategoryCard } from "./CategoryCard";
 import { getCategories } from "@/actions/category/get-categories";
 
+interface Props {
+  basic?: boolean
+}
 
-
-export const CategoryList = async () => {
+export const CategoryList = async ({basic}: Props) => {
 
   const { ok, categories } = await getCategories();
 
-  if (!ok ) {
+ 
+
+  if (!ok) {
     return (
       <aside className="md:w-72 md:h-screen bg-white">
         <div className="p-5">
@@ -17,20 +21,25 @@ export const CategoryList = async () => {
       </aside>
     )
   }
+  const basicCategories = ['hamburguesas', 'postres', 'cajita_feliz','bebidas','ensaladas','mcnuggets','bebidas_mccafe']
+  const reduceCategoriesToBasic = categories!.filter( category => basicCategories.includes( category.slug ) )
+
+
+  const categoriesList = !basic ? categories : reduceCategoriesToBasic
+
+
   return (
 
-    <nav className="mt-10 ">
+    <nav
+    className="flex justify-center gap-2 px-5 bg-white"
 
-      <div
-        className="grid gap-4 m-auto px-10 bg-red-500/10"
-        style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(65px, 2fr))' }}
-      >
-        {
-          categories!.map(category => (
-            <CategoryCard key={category.id} category={category} />
-          ))
-        }
-      </div>
+    >
+      {
+        categoriesList!.map(category => (
+          <CategoryCard key={category.id} category={category} />
+        ))
+      }
     </nav>
+
   )
 }

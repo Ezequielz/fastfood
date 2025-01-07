@@ -1,6 +1,12 @@
 
-import { BannerMain } from "../components/banners/BannerMain";
+import { Featured } from "../components/home/Featured";
+import { BannerMain } from "../components/home/BannerMain";
+import { Marketing } from "../components/home/Marketing";
+import { Titles } from "../components/home/Titles";
 import { Navbar } from "../components/ui/Navbar";
+import { NavbarMenu } from "../components/ui/NavbarMenu";
+import { Carousel } from "../components/home/Carousel";
+import { Accordion } from "../components/home/Accordion";
 
 
 export default function Home() {
@@ -14,12 +20,23 @@ export default function Home() {
         <Navbar color="white" />
       </div>
 
-      <BannerMain />
+
+      <div className="relative">
+
+        <div
+          className="bg-gradient-to-r from-[#292929b3] w-full h-full absolute "
+        />
+        <BannerMain />
+      </div>
 
 
-      <p className="z-20 text-5xl">
-        asdasdasdasd
-      </p>
+      <NavbarMenu basic />
+
+      <Featured />
+      <Marketing />
+      <Titles />
+      <Carousel />
+      <Accordion />
 
 
     </>
