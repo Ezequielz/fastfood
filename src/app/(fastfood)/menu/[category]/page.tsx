@@ -2,6 +2,7 @@ import { getCategorieBySlug } from "@/actions/category/get-category-by-slug";
 
 import { Suspense } from "react";
 import { ProductsByCategoryList } from "../components/products/ProductsByCategoryList";
+import { ProductsByCategoryListSkeleton } from "../components/products/ProductsByCategoryListSkeleton";
 
 
 
@@ -39,8 +40,8 @@ export default async function OrderCategoryPage({ params }: Props) {
     <div className="p-5 ">
 
       <h2 className="my-5 text-2xl font-bold md:text-3xl">{category!.name}</h2>
-      <Suspense fallback={ <div>Cargando...</div> }>
-
+      <Suspense fallback={ <ProductsByCategoryListSkeleton quantotyCards={20} /> }>
+        
         <ProductsByCategoryList category={category!} />
       </Suspense>
     </div>

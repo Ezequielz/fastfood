@@ -11,7 +11,7 @@ export default function MenuLayout({ children }: Readonly<{ children: React.Reac
 
             <Navbar />
 
-            <NavbarMenu />
+            <NavbarMenu quantityIcons={16}/>
             <div className="md:flex">
                 <main className="md:flex-1   px-5">
                     {children}

@@ -1,5 +1,6 @@
 import { ProductToOrder } from "@/app/(fastfood)/menu/components/products/ProductToOrder";
 import { Suspense } from "react";
+import { ProductToOrderSkeleton } from "../../components/products/ProductToOrderSkeleton";
 
 
 interface Props {
@@ -16,7 +17,7 @@ export default async function OrderProductPAge({ params }: Props) {
 
   return (
     <Suspense fallback={<div>Cargando...</div>}>
-
+      <ProductToOrderSkeleton />
       <ProductToOrder productSlug={productSlug} />
 
     </Suspense>
