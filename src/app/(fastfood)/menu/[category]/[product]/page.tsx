@@ -16,8 +16,8 @@ export default async function OrderProductPAge({ params }: Props) {
 
 
   return (
-    <Suspense fallback={<div>Cargando...</div>}>
-      <ProductToOrderSkeleton />
+    <Suspense fallback={<ProductToOrderSkeleton />}>
+      
       <ProductToOrder productSlug={productSlug} />
 
     </Suspense>

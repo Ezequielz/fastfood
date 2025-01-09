@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import { IoCloseOutline } from 'react-icons/io5';
 
 import { formatCurrency } from '@/utils/formatCurrency';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 
 import { createOrder } from '@/actions/order/create-order';
@@ -33,7 +33,7 @@ export const SidebarOrder = () => {
             price: product.price,
             subtotal: product.subtotal,
             quantity: product.quantity,
-            
+
             options: product.options.map((opt) => ({
                 id: opt.id,
                 quantity: opt.quantity,
@@ -54,6 +54,14 @@ export const SidebarOrder = () => {
 
         setCreatingOrder(false);
     };
+
+    useEffect(() => {
+        if (order.length >= 1) return;
+
+        closeOrderSidebarDetails()
+      
+    }, [order,closeOrderSidebarDetails])
+    
 
     return (
         <div>
@@ -128,7 +136,7 @@ export const SidebarOrder = () => {
                     )
                 }
 
-                <footer className='absolute bottom-0 bg-amber-500/10  w-full p-5 flex justify-center items-center gap-2'>
+                <footer className='absolute bottom-0 bg-slate-500/10  w-full p-5 flex flex-col justify-center items-center gap-2'>
 
                     <p className='font-medium text-xl '>
                         TOTAL:
@@ -137,24 +145,33 @@ export const SidebarOrder = () => {
                             {formatCurrency(totalPrice)}
                         </strong>
                     </p>
-                    {
-                        !creatingOrder ? (
-                            <button
 
-                                className='px-4 py-2 bg-amber-500 hover:bg-amber-400 text-xl text-slate-100 rounded-lg'
-                                onClick={handleCreateOrder}
-                            >
-                                Confirmar orden
-                            </button>
-                        ) : (
-                            <button
-                                className='px-4 py-2 bg-amber-500 text-xl text-slate-100 rounded-lg'
-                                disabled
-                            >
-                                Creando orden...
-                            </button>
-                        )
-                    }
+                    <div className='flex gap-2'>
+                        <button
+                            className='px-5 py-2 text-sm font-light border-2 border-amber-200 bg-white
+                            hover:bg-amber-400 hover:text-white'
+                            onClick={closeOrderSidebarDetails}
+                        >Seguir comprando</button>
+
+                        {
+                            !creatingOrder ? (
+                                <button
+
+                                    className='px-4 py-2 bg-white border-2 border-lime-400 hover:bg-lime-300 text-xl  rounded-lg'
+                                    onClick={handleCreateOrder}
+                                >
+                                    Confirmar orden
+                                </button>
+                            ) : (
+                                <button
+                                    className='px-4 py-2 bg-lime-500 text-xl text-slate-100 rounded-lg'
+                                    disabled
+                                >
+                                    Creando orden...
+                                </button>
+                            )
+                        }
+                    </div>
 
                 </footer>
 

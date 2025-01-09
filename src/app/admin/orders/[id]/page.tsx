@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { AdminOrder } from "../components/AdminOrder";
+import { AdminOrderSkeleton } from "../components/AdminOrderSkeleton";
 
 
 
@@ -13,8 +14,8 @@ export default async function AdminOrderIdPage({ params }: Props) {
     const { id: orderId } = await params;
 
     return (
-        <Suspense fallback={<div>Cargando...</div>}>
-       
+        <Suspense fallback={<AdminOrderSkeleton />}>
+           
             <AdminOrder orderId={orderId} />
         </Suspense>
     );
