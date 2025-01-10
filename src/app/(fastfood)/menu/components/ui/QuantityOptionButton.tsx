@@ -1,9 +1,9 @@
 'use client'
 import { IoAddSharp, IoRemoveSharp } from "react-icons/io5";
 
-import { ProductOption } from "@/interfaces/order";
 import { useOrderStore } from "@/store/order/order-store";
 import { formatCurrency } from "@/utils/formatCurrency";
+import { ProductOption } from "@/interfaces/product";
 
 
 interface Props {

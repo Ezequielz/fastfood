@@ -1,7 +1,8 @@
 
 'use client'
 
-import { OptionsGroupWithRelations } from "@/interfaces/order"
+
+import { OptionsGroupWithRelations } from "@/interfaces/product"
 import { OptionsGroups } from "./options/OptionsGroups"
 import { useOrderStore } from "@/store/order/order-store"
 

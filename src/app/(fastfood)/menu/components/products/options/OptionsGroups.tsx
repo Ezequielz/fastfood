@@ -1,6 +1,7 @@
 
+import { OptionsGroupWithRelations } from "@/interfaces/product";
 import { Options } from "./Options";
-import { OptionsGroupWithRelations } from "@/interfaces/order";
+
 
 
 

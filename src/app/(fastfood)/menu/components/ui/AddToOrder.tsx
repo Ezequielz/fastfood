@@ -1,12 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 
-import { OrderProduct, ProductWhitCategory } from "@/interfaces/order";
+import { OrderProduct } from "@/interfaces/order";
 import { useOrderStore } from "@/store/order/order-store";
 import { formatCurrency } from "@/utils/formatCurrency";
 
 import { useEffect } from "react";
 import { OptionsToOrder } from "../products/options/OptionsToOrder";
+import { ProductWhitCategory } from "@/interfaces/product";
 
 
 

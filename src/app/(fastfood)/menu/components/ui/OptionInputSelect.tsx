@@ -1,6 +1,7 @@
 'use client'
 
-import { ProductOption } from "@/interfaces/order"
+
+import { ProductOption } from "@/interfaces/product";
 import { useOrderStore } from "@/store/order/order-store";
 
 
