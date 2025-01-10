@@ -3,8 +3,13 @@ import { OrderDetails } from "@/app/(fastfood)/order/components/OrderDetails";
 
 import Link from "next/link";
 
-export default async function Order({ params }: { params: { id: string } }) {
-  const { id: orderId } = params;
+interface Props {
+  params: Promise<{ id: string }>
+}
+
+
+export default async function Order({ params }: Props) {
+  const { id: orderId } = await params;
 
   return (
     <article className="w-full max-w-2xl mx-auto mt-8 p-2 bg-white rounded-lg shadow-lg">
