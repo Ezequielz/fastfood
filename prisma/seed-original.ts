@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import pLimit from 'p-limit';
 
 import { formatText } from '../src/utils/formatSlug';
 import prisma from '../src/lib/prisma';
@@ -17,7 +16,7 @@ async function main() {
     await prisma.category.deleteMany();
     await prisma.optionsGroup.deleteMany();
     await prisma.option.deleteMany();
-
+ 
 
     // Formateo de slug de categorías
     const categoryWithSlugFormatted = categories.map((category) => ({
@@ -37,11 +36,9 @@ async function main() {
       return map;
     }, {} as Record<string, string>);
 
-
-    const limit = pLimit(5); // Limita a 5 operaciones concurrentes
-
-    const productPromises = products.map((product) =>
-      limit(async () => {
+    // Creación de productos con grupos de opciones y opciones
+    await Promise.all(
+      products.map(async (product) => {
         const { category, optionsGroups, ...rest } = product;
 
         const prodCreated = await prisma.product.create({
@@ -53,15 +50,16 @@ async function main() {
         });
 
         if (prodCreated && optionsGroups) {
-          for (const group of optionsGroups) {
-            await createOptionsGroupWithOptions(group, prodCreated.id, null);
-          }
+          await Promise.all(
+            optionsGroups.map((group) =>
+              createOptionsGroupWithOptions(group, prodCreated.id, null)
+            )
+          );
         }
       })
     );
 
-    await Promise.all(productPromises);
-
+    
   } catch (error) {
     console.log(error);
   }
