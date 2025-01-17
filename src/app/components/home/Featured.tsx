@@ -4,11 +4,19 @@ export const Featured = () => {
     return (
 
         <section className="lg:flex-row-reverse lg:h-max-[492px] pt-20 flex w-full flex-col bg-white" >
-            <figure className="lg:w-[39%] relative">
+            <figure className="hidden lg:block lg:w-[39%] relative">
                 <Image
                     src="https://mcd-landings-q-static.appmcdonalds.com/uploads-quality/featured_Tile_Desktop_e086fa9a29.jpg"
                     fill
                     className="h-full w-full object-cover"
+                    alt="McDonald's Hamburguesa"
+                />
+            </figure>
+            <figure className="h-[300px] sm:h-[400px]  lg:hidden lg:w-[39%] relative">
+                <Image
+                    src="https://mcd-landings-q-static.appmcdonalds.com/uploads-quality/featured_Tile_Mobile_ad909f4648.jpg"
+                    fill
+                    className="h-full w-full object-fill sm:object-contain sm:object-right"
                     alt="McDonald's Hamburguesa"
                 />
             </figure>

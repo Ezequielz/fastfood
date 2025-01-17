@@ -1,16 +1,17 @@
 
-import { CategoryCard } from "./CategoryCard";
+
 import { getCategories } from "@/actions/category/get-categories";
+import { SwiperNavCategories } from "./ui/SwiperNavCategories";
 
 interface Props {
   basic?: boolean
 }
 
-export const CategoryList = async ({basic}: Props) => {
+export const CategoryList = async ({ basic }: Props) => {
 
   const { ok, categories } = await getCategories();
 
- 
+
 
   if (!ok) {
     return (
@@ -21,8 +22,8 @@ export const CategoryList = async ({basic}: Props) => {
       </aside>
     )
   }
-  const basicCategories = ['hamburguesas', 'postres', 'cajita_feliz','bebidas','ensaladas','mcnuggets','bebidas_mccafe']
-  const reduceCategoriesToBasic = categories!.filter( category => basicCategories.includes( category.slug ) )
+  const basicCategories = ['hamburguesas', 'postres', 'cajita_feliz', 'bebidas', 'ensaladas', 'mcnuggets', 'bebidas_mccafe']
+  const reduceCategoriesToBasic = categories!.filter(category => basicCategories.includes(category.slug))
 
 
   const categoriesList = !basic ? categories : reduceCategoriesToBasic
@@ -31,14 +32,14 @@ export const CategoryList = async ({basic}: Props) => {
   return (
 
     <nav
-    className="flex justify-center gap-2 px-5 bg-white"
+      className="flex justify-center gap-2 px-5 bg-white"
 
     >
-      {
-        categoriesList!.map(category => (
-          <CategoryCard key={category.id} category={category} />
-        ))
-      }
+      <SwiperNavCategories
+      
+        categoriesList={categoriesList!}
+      />
+
     </nav>
 
   )

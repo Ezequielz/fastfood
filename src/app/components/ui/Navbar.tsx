@@ -43,7 +43,7 @@ export const Navbar = ({color = 'black'}: Props) => {
 
         </header>
 
-        <nav className={`text-${color} mx-14 hidden min-h-10 gap-2 text-lg md:flex md:flex-row md:items-center md:gap-12`}>
+        <nav className={`text-${color} mx-14  min-h-10 gap-2 text-lg md:flex md:flex-row md:items-center md:gap-12`}>
 
           {
             NavLinks.map((link) => (
