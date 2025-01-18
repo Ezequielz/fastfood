@@ -12,7 +12,7 @@ interface State {
 
 
 export const useUiStore = create<State>()((set) => ({
-    isSideMenuAdminOpen: false,
+    isSideMenuAdminOpen: true,
     openSideMenuAdmin: () => {
         set({ isSideMenuAdminOpen: true });
     },

@@ -22,11 +22,11 @@ interface Props {
   color?: string
 }
 
-export const Navbar = ({color = 'black'}: Props) => {
+export const Navbar = ({ color = 'black' }: Props) => {
   return (
 
     <div className="z-20 border border-transparent duration-250 relative h-fit bg-transparent transition-all ease-out md:h-[180px]">
-      <div className="my-2 ml-2 mr-4 mx-auto md:mx-14 md:my-0">
+      <div className="my-2 ml-2 mr-4 mx-auto md:mx-14 md:my-0 w-full">
         <header className="mx-auto flex h-fit items-center justify-between gap-2 md:min-h-[8rem]">
           <div className="flex flex-1 items-center gap-2 md:flex-none">
             <div className="block h-12 w-12">
@@ -41,7 +41,20 @@ export const Navbar = ({color = 'black'}: Props) => {
             </div>
           </div>
 
+          <div className="absolute top-6 right-14 ">
+            <Link href={'/admin'} 
+              className="border-2 border-amber-400 rounded-lg text-amber-400 px-4 py-2
+              hover:bg-amber-400 hover:text-black"
+            >
+              Admin
+            </Link>
+
+          </div>
+
         </header>
+
+
+
 
         <nav className={`text-${color} mx-14  min-h-10 gap-2 text-lg md:flex md:flex-row md:items-center md:gap-12`}>
 
